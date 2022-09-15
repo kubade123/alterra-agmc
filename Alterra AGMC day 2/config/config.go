@@ -2,8 +2,7 @@ package config
 
 import (
 	"fmt"
-	"project/models"
-
+	"Alterra AGMC day 2/models"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
