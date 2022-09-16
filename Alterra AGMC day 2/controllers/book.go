@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"day2/models"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -15,7 +16,7 @@ func CreateBooks(e echo.Context) error {
 	id := e.FormValue("id")
 	title := e.FormValue("title")
 
-	var book Book
+	var book models.Book
 	book.Id = id
 	book.Title = title
 
