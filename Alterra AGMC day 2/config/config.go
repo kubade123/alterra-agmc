@@ -1,8 +1,9 @@
 package config
 
 import (
+	"day2/models"
 	"fmt"
-	"Alterra AGMC day 2/models"
+
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -10,27 +11,31 @@ import (
 var DB *gorm.DB
 
 func InitDB() {
-	config = map[string]string{
-		" DB_Username": "root",
-		" DB_Password": "123ABC4d",
-		" DB_Port":     "3306",
-		" DB_Host":     "127.0.0.1",
-		" DB_Name":     "training"}
-	connectionString :=
-		fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local",
-			config["DB_Username"],
-			config["DB_Password"],
-			config["DB_Host"],
-			config["DB_Port"],
-			config["DB_Name"])
-	var e error
-	DB, e = gorm.Open(mysql.Open(connectionString), &gorm.Config{})
-	if e != nil {
-		panic(e)
+	config := map[string]string{
+		"DB_USER": "root",
+		"DB_PASS": "kubade123",
+		"DB_PORT": "3306",
+		"DB_HOST": "127.0.0.1",
+		"DB_NAME": "alterra_agmc",
 	}
-	InitMigrate()
+	// dsn
+	connectionString := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
+		config["DB_USER"],
+		config["DB_PASS"],
+		config["DB_HOST"],
+		config["DB_PORT"],
+		config["DB_NAME"])
+
+	var err error
+	DB, err = gorm.Open(mysql.Open(connectionString), &gorm.Config{})
+	if err != nil {
+		panic(err)
+	}
+
+	// Migration
+	// InitMigrate()
 }
 
 func InitMigrate() {
-	DB.AutoMigrate(&models.Users{})
+	DB.AutoMigrate(&models.User{})
 }

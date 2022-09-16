@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"project/controllers"
+	"day2/controllers"
 
 	"github.com/labstack/echo/v4"
 )
@@ -9,5 +9,7 @@ import (
 func New() *echo.Echo {
 	e := echo.New()
 	e.GET("/Books", controllers.ShowBooks)
-	e.POST("/Books", CreateBooks)
+	e.POST("/Books", controllers.PostBooks)
+
+	return e
 }
